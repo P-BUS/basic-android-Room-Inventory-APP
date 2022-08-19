@@ -57,6 +57,8 @@ class ItemListFragment : Fragment() {
             this.findNavController().navigate(action)
         }
         binding.recyclerView.adapter = adapter
+        // Attach an observer on the allItems list to update the UI automatically when the data
+        // changes.
         viewModel.allItems.observe(this.viewLifecycleOwner) { items ->
             items.let {
                 adapter.submitList(it)
@@ -69,5 +71,7 @@ class ItemListFragment : Fragment() {
             )
             this.findNavController().navigate(action)
         }
+
+
     }
 }

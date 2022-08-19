@@ -89,6 +89,18 @@ class ItemDetailFragment : Fragment() {
     }
 
     /**
+     * Navigate to the Edit item screen.
+     */
+    private fun editItem() {
+        val action = ItemDetailFragmentDirections.actionItemDetailFragmentToAddItemFragment(
+            getString(R.string.edit_fragment_title),
+            item.id
+        )
+        this.findNavController().navigate(action)
+
+    }
+
+    /**
      * Called when fragment is destroyed.
      */
     override fun onDestroyView() {
@@ -96,6 +108,9 @@ class ItemDetailFragment : Fragment() {
         _binding = null
     }
 
+    /**
+     * Binds views with the passed in item data.
+     */
     private fun bind(item: Item) {
         binding.apply {
             itemName.text = item.itemName
@@ -104,7 +119,7 @@ class ItemDetailFragment : Fragment() {
             sellItem.isEnabled = viewModel.isStockAvailable(item)
             sellItem.setOnClickListener { viewModel.sellItem(item) }
             deleteItem.setOnClickListener { showConfirmationDialog() }
-
+            editItem.setOnClickListener { editItem() }
         }
     }
 }
